@@ -98,7 +98,7 @@ dashboardPage(skin="purple",
           column(width=6,
                  selectInput("hinge.ds", label="Hinge", choices=c(0,1,2,3,4), selected=2, width="100%")),
           column(width=6,
-                 selectInput("HC-HC.ds", label="intra HC-HC",choices=c(0,1,2,3,4), selected=4, width="100%"))),
+                 numericInput("HC-HC.ds", label="intra HC-HC", value=4, min=0, max=15, step=1,width="100%"))),
         fluidRow(
           column(width=6,
                  selectInput("LC-LC.ds", label="intra LC-LC", choices=c(0,1,2,3), selected=2, width="100%")),

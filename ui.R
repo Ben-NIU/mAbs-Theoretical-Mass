@@ -11,11 +11,9 @@ dashboardPage(skin="purple",
       menuItem("Reduced MS", icon=icon("cubes"), tabName = "Red"),
       hr(),
       
-        span(strong("Heavy chain"), style="font-family:'calibri';font-size: 14pt;color:#FFFF00; text-decoration: underline"),
         uiOutput("Nterm.hc"),
         uiOutput("Cterm.hc"),
-    
-        span(strong("Light chain"), style="font-family:'calibri';font-size: 14pt;color:#FFFF00;text-decoration: underline"),
+      br(),
         uiOutput("Nterm.lc")
       
       
@@ -93,6 +91,10 @@ dashboardPage(skin="purple",
       column(width=5,
       box(title="Disulfide Bonds Status of Monomer", status="primary", solidHeader = TRUE, collapsible = TRUE, width = "100%",
         fluidRow(
+          column(width=12,
+          verbatimTextOutput("instruction"))
+        ),
+        fluidRow(
           column(width=6,
                  selectInput("hinge.ds", label="Hinge", choices=c(0,1,2,3,4), selected=2, width="100%")),
           column(width=6,
@@ -121,14 +123,14 @@ dashboardPage(skin="purple",
       fluidRow(      
       column(width=4,
              
-       box(title="# UnReduced intra-chain Disuldife bonds", status="primary", solidHeader = TRUE, collapsible = TRUE,width="100%",
+       box(title="# of UnReduced intra-chain Disuldife bonds", status="primary", solidHeader = TRUE, collapsible = TRUE,width="100%",
           fluidRow(
             column(width=12,
                  numericInput("unR.hc", "Heavy chain", value=3, min=0, max=6, step=1))),
           fluidRow(
             column(width=12,
       
-                 numericInput("unR.lc", "Light chain", value=1, min=0, max=4, step=1))),
+                 numericInput("unR.lc", "Light chain", value=2, min=0, max=4, step=1))),
             fluidRow(
             column(width=12,
      

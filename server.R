@@ -33,21 +33,21 @@ shinyServer(function(input, output) {
    
    output$Nterm.hc<-renderUI({
      if(substr(as.character(PRO()$HC[2]),1,1) %in% c("Q","E")){
-       radioButtons("Nterm.hc", label="N-terminal PyroE", choices=list("Yes","No"), selected = "Yes", inline=TRUE)
+       radioButtons("Nterm.hc", label="HC N-terminal PyroE", choices=list("Yes","No"), selected = "Yes", inline=TRUE)
      } else {
        NULL}
    })
    
    output$Cterm.hc<-renderUI({
-     if(substr(as.character(PRO()$HC[2]), as.numeric(as.character(PRO()$HC[1]))-5, as.numeric(as.character(PRO()$HC[1]))) =="SLSPGK") {
-       radioButtons("Cterm.hc", label="C-terminal Lys Loss", choices=list("Yes","No"), selected="Yes", inline=TRUE)
+     if(substr(as.character(PRO()$HC[2]), as.numeric(as.character(PRO()$HC[1]))-1, as.numeric(as.character(PRO()$HC[1]))) =="GK") {
+       radioButtons("Cterm.hc", label="HC C-terminal Lys Loss", choices=list("Yes","No"), selected="Yes", inline=TRUE)
      } else{
        NULL}
    })
    
    output$Nterm.lc<-renderUI({
      if(substr(as.character(PRO()$LC[2]),1,1) %in% c("Q","E")){
-       radioButtons("Nterm.lc", label="N-terminal PyroE", choices=list("Yes","No"), selected = "Yes", inline=TRUE)
+       radioButtons("Nterm.lc", label="LC N-terminal PyroE", choices=list("Yes","No"), selected = "Yes", inline=TRUE)
      } else {
        NULL}
    })
@@ -100,6 +100,7 @@ shinyServer(function(input, output) {
     output$note<-renderText('The "Theoretical" composition and mass assume all disulfide bonds have been reduced; whereas the "Expected" composition and mass correspond to Heavy Chain with 3 un-reduced intra-disulfide bonds, and Light Chain with 2 un-reduced intra-disulfide bond.')
   })
     
+  output$instruction<-renderText("The inputs here are used to determine the # of disulfide bonds within each half molecule of mAb (i.e., one heavy chain and one light chain), the software then assumes symmetry and calculates the mass impact of the entry for the whole molecule (two heavy and two light chains). Hinge region is where the two half molecules are connected. Typically for IgG1 and IgG4, there are 2 disulfide bonds; and for IgG2, there are 4 disulfide bonds.")
   
 }
 )

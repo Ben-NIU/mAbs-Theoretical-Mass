@@ -1,0 +1,146 @@
+---
+title: "Molecule Property Report"
+author: "Ben Niu"
+
+output: 
+  html_document:
+   theme: united
+
+params:
+  a: "NULL"
+  b: "NULL"
+  c: "NULL"
+  d: "NULL"
+  e: "NULL"
+  f: "NULL"
+  g: "NULL"
+  h: "NULL"
+  i: "NULL"
+  j: "NULL"
+  k: "NULL"
+  l: "NULL"
+
+---
+
+<style type="text/css">
+
+
+h1.title {
+  font-size: 38px;
+  color: Black;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+  font-size: 28px;
+  color: DarkBlue;
+}
+h5 { /* Header 5 */
+  font-family: "Courier"; font-size: 14px;
+}
+
+</style>
+
+
+<div style="margin-bottom:100px;">
+```{r loading packages and functions, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(dplyr)
+library(kableExtra)
+
+```
+
+
+</div>
+### The protein contains, in total, `r (params$j+params$k)*2` amino acids.  
+### **Heavy chain** sequence (`r params$j` amino acids) is:  
+##### `r params$f`
+
+### **Light chain** sequence (`r params$k` amino acids) is:    
+##### `r params$g`  
+
+### The **extinction coefficient (EC)** of this protein is *`r params$l` /(m cm)*.[^1]
+[^1]: Theoretical extinction coefficient was calculated using the Edelhoch method but with the extinction coefficients for Trp and Tyr determined by Pace et al. Refer to (i) Edelhoch, H. (1967) Spectroscopic determination of tryptophan and tyrosine in proteins. Biochemistry 6, 1948-1954. (ii) Pace, C.N., Vajdos, F., Fee, L., Grimsley, G., and Gray, T. (1995) How to measure and predict the molar absorption coefficient of a protein. Protein Sci. 11, 2411-2423.
+
+
+```{r HC AA, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$h, caption = "Heavy Chain Residue Composition", format = "html", align="c") %>% kable_styling(bootstrap_options = c("striped","condensed","responsive","hover"))  %>%
+  column_spec(1, bold = T, color = "red") %>%
+  row_spec(0, bold = T)
+```
+
+
+
+```{r LC AA, echo=FALSE, results= 'asis', message=FALSE, warning=FALSE}
+knitr::kable(params$i, caption = "Light Chain Residue Composition", format = "html", align="c") %>% kable_styling(bootstrap_options =  c("striped","condensed","responsive","hover"))  %>%
+  column_spec(1, bold = T, color = "red") %>%
+  row_spec(0, bold = T)
+```
+
+
+<div style="margin-bottom:50px;">
+</div>
+
+## *Non-reduced Calculations*    
+
+```{r nR, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$a, caption = "Non-reduced Masses and Formulas",format = "html",row.names = FALSE, align = "c", col.names = c("HC-pE","LC-pE","CtermK removal","Glycan","DSB","C","H","N","O","S","Mass")) %>% kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=5,"Compositions"=5," "=1)) %>%
+column_spec(6, border_left = T) %>%
+  column_spec(11, border_left = T, bold = T)
+ 
+```
+
+<div style="margin-bottom:50px;">
+</div>
+## *Reduced Calculations* 
+### **Heavy Chain** 
+
+```{r HC fully Reduced, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$b, caption = "Fully-reduced Heavy Chain", format = "html", row.names = FALSE,  align = "c", col.names = c("HC-pE", "CtermK removal", "Glycan", "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(4, border_left = T) %>%
+  column_spec(9, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=3,"Compositions"=5," "=1))
+  
+```
+
+
+
+```{r HC withDSB, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$c, caption = "Heavy Chain with unreduced intra-chain disulfide bonds", format = "html", row.names = FALSE, align = "c", col.names = c("HC-pE", "CtermK removal", "Glycan", "#.UnReduced DSB", "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(5, border_left = T) %>%
+  column_spec(10, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=4,"Compositions"=5," "=1))
+  
+```
+
+<div style="margin-bottom:50px;">
+</div>
+### **Light Chain**  
+
+```{r LC fully Reduced, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$d, caption = "Fully-reduced Light Chain", format = "html",  row.names = FALSE,  align = "c", col.names = c("LC-pE" , "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(2, border_left = T) %>%
+  column_spec(7, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=1,"Compositions"=5," "=1))
+  
+```
+
+
+```{r LC withDSB, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$e, caption = "Light Chain with unreduced intra-chain disulfide bonds", format = "html",row.names = FALSE, align = "c", col.names = c("LC-pE" , "#.Unreduced DSB", "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options  = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(3, border_left = T) %>%
+  column_spec(8, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+   add_header_above(c("Modifications"=2,"Compositions"=5," "=1))
+ 
+```
+
+
+
+

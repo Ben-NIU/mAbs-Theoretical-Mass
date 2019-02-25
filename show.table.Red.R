@@ -1,23 +1,23 @@
-show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, nonRds.intraHC=3, nonRds.intraLC=1){
-  source("Calc.Mass.HC.R")
-  source("Calc.Mass.LC.R")
+show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, AorB, Others, howmany, where, ds.unhc=3, ds.unlc=2){
+  source("Calc.Mass.HC.Red.R")
+  source("Calc.Mass.LC.Red.R")
   
   ## compute the theoretical formula depending on PTM input.
-  HC.form.thr<-Calc.Mass.HC(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, 0, 0, 0)  ## REPORT
-  LC.form.thr<-Calc.Mass.LC(as.character(Seq.info$LC[2]), PyroE.lc, 0, 0)  ## REPORT
+  HC.form.thr<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, AorB, Others, howmany, where, 0)  ## REPORT
+  LC.form.thr<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, AorB, Others, howmany,where,0)  ## REPORT
 
 
   #===========================================================#
-  Standard<-c("C"=12.01078, "H"=1.007947, "N"=14.00672, "O"=15.99943, "S"=32.0655)
+  Standard<-c("C"=12.0107, "H"=1.00794, "N"=14.0067, "O"=15.9994, "S"=32.065)
   ## compute the AVERAGE mass of theoretical formula depending on PTM input.
-  HC.mass.thr<-round(sum(HC.form.thr*Standard),1)  ## REPORT
-  LC.mass.thr<-round(sum(LC.form.thr*Standard),1)  ## REPORT
+  HC.mass.thr<-round(sum(HC.form.thr*Standard),2)  ## REPORT
+  LC.mass.thr<-round(sum(LC.form.thr*Standard),2)  ## REPORT
 
   
-  HC.form.expect<-Calc.Mass.HC(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, 0, 0, nonRds.intraHC) ## REPORT
-  LC.form.expect<-Calc.Mass.LC(as.character(Seq.info$LC[2]), PyroE.lc, 0, nonRds.intraLC)  ## REPORT
-  HC.mass.expect<-round(sum(HC.form.expect*Standard),1)  ## REPORT
-  LC.mass.expect<-round(sum(LC.form.expect*Standard),1)  ## REPORT
+  HC.form.expect<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, AorB, Others, howmany, where, ds.unhc)  ## REPORT
+  LC.form.expect<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, AorB, Others, howmany,where,ds.unlc)  ## REPORT
+  HC.mass.expect<-round(sum(HC.form.expect*Standard),2)  ## REPORT
+  LC.mass.expect<-round(sum(LC.form.expect*Standard),2)  ## REPORT
 
   
   #===============================================================================#

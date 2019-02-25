@@ -1,6 +1,6 @@
 # Return the LC formula depending on PTM input.
 
-Calc.Mass.LC<-function(LC, PyroE.lc,ds.lchc, ds.lclc){
+Calc.Mass.LC<-function(LC, PyroE.lc, ds.lclc){
   
 
 
@@ -17,6 +17,6 @@ Calc.Mass.LC<-function(LC, PyroE.lc,ds.lchc, ds.lclc){
     }
   }
   
-  total<-unlist(ConvertPeptide(LC, IAA=FALSE)) + pyroe + c(C=0, H=as.numeric(ds.lchc)*(-1), N=0, O=0,S=0) + c(C=0, H=as.numeric(ds.lclc)*(-2), N=0, O=0, S=0)
+  total<-unlist(ConvertPeptide(LC, IAA=FALSE)) + pyroe  + c(C=0, H=as.numeric(ds.lclc)*(-1), N=0, O=0, S=0)
   return(total)
 }

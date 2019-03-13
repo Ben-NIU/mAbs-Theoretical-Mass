@@ -1,0 +1,12 @@
+name: Ab-IntactMS
+title: Ab-IntactMS
+username:
+account: benniu-wustl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 788182
+bundleId: 1937762
+url: https://benniu-wustl.shinyapps.io/Ab-IntactMS/
+when: 1552512294.15484
+asMultiple: FALSE
+asStatic: FALSE

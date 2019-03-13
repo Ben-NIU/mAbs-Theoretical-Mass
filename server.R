@@ -240,7 +240,7 @@ row_spec(c(1,2), bold = T,color="white",background = "#3088BE")
   
 
   observeEvent(input$input.file,{
-    output$note<-renderText('NOTE: The "Theoretical" formula and mass assume all disulfide bonds have been reduced; whereas the "Expected" formula and mass correspond to Heavy Chain and Light Chain with un-reduced intra-chain disulfide bonds.')
+    output$note<-renderText('NOTE: The "Fully reduced" formula and mass assume all disulfide bonds have been reduced; whereas the "Partially reduced" formula and mass correspond to Heavy Chain and Light Chain with un-reduced intra-chain disulfide bonds, which are typically retained even in reducing environment until denaturant (e.g., urea) is added.')
   })
   
   observeEvent(input$input.file,{

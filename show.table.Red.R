@@ -21,8 +21,8 @@ show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, Others, 
 
   
   #===============================================================================#
-  HC.info<-data.frame( "C"=as.integer(c(HC.form.expect[["C"]], HC.form.thr[["C"]])),"H"=as.integer(c(HC.form.expect[["H"]], HC.form.thr[["H"]])),"N"=as.integer(c(HC.form.expect[["N"]],HC.form.thr[["N"]])),"O"=as.integer(c(HC.form.expect[["O"]], HC.form.thr[["O"]])),"S"=as.integer(c(HC.form.expect[["S"]],HC.form.thr[["S"]])), "Mass (Da)"=c(HC.mass.expect,HC.mass.thr), "Description"=c("Expected","Theoretical"), check.names = FALSE)
-  LC.info<-data.frame( "C"=as.integer(c(LC.form.expect[["C"]], LC.form.thr[["C"]])),"H"=as.integer(c(LC.form.expect[["H"]], LC.form.thr[["H"]])),"N"=as.integer(c(LC.form.expect[["N"]],LC.form.thr[["N"]])),"O"=as.integer(c(LC.form.expect[["O"]], LC.form.thr[["O"]])),"S"=as.integer(c(LC.form.expect[["S"]],LC.form.thr[["S"]])), "Mass (Da)"=c(LC.mass.expect,LC.mass.thr), "Description"=c("Expected","Theoretical"), check.names = FALSE)
+  HC.info<-data.frame( "C"=as.integer(c(HC.form.expect[["C"]], HC.form.thr[["C"]])),"H"=as.integer(c(HC.form.expect[["H"]], HC.form.thr[["H"]])),"N"=as.integer(c(HC.form.expect[["N"]],HC.form.thr[["N"]])),"O"=as.integer(c(HC.form.expect[["O"]], HC.form.thr[["O"]])),"S"=as.integer(c(HC.form.expect[["S"]],HC.form.thr[["S"]])), "Mass (Da)"=c(HC.mass.expect,HC.mass.thr), "Description"=c("Partially reduced","Fully reduced"), check.names = FALSE)
+  LC.info<-data.frame( "C"=as.integer(c(LC.form.expect[["C"]], LC.form.thr[["C"]])),"H"=as.integer(c(LC.form.expect[["H"]], LC.form.thr[["H"]])),"N"=as.integer(c(LC.form.expect[["N"]],LC.form.thr[["N"]])),"O"=as.integer(c(LC.form.expect[["O"]], LC.form.thr[["O"]])),"S"=as.integer(c(LC.form.expect[["S"]],LC.form.thr[["S"]])), "Mass (Da)"=c(LC.mass.expect,LC.mass.thr), "Description"=c("Partially reduced","Fully reduced"), check.names = FALSE)
   
   Overall<-list(HC=HC.info, LC=LC.info)
   return(Overall)

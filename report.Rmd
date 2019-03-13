@@ -1,6 +1,6 @@
 ---
-title: "Molecule Property Report"
-author: "Ben Niu"
+title: Antibody Property Report
+
 
 output: 
   html_document:
@@ -19,8 +19,20 @@ params:
   j: "NULL"
   k: "NULL"
   l: "NULL"
-
+  m: "NULL"
+  o: "NULL"
+  p: "NULL"
+  q: "NULL"
+  A: "NULL"
+  B: "NULL"
+  D: "NULL"
+  E: "NULL"
+  H: "NULL"
+  I: "NULL"
+  M: "NULL"
 ---
+
+
 
 <style type="text/css">
 
@@ -37,11 +49,17 @@ h2 { /* Header 2 */
   font-size: 28px;
   color: DarkBlue;
 }
+h3 { /* Header 3 */
+  font-size: 22px;
+  text-align: justify;
+}
 h5 { /* Header 5 */
   font-family: "Courier"; font-size: 14px;
 }
 
 </style>
+
+##### `r params$o`  
 
 
 <div style="margin-bottom:100px;">
@@ -53,16 +71,19 @@ library(kableExtra)
 
 
 </div>
-### The protein contains, in total, `r (params$j+params$k)*2` amino acids.  
-### **Heavy chain** sequence (`r params$j` amino acids) is:  
+### Therapeutic antibody ``r params$m`` is  `r  params$p`, it contains, in total, `r (params$j+params$k)*2` amino acids, with **extinction coefficient (EC)** of  *`r params$l` /(m cm)*, based on `r params$E` tryptophan, `r params$H` tyrosine, `r params$I` cystine`r params$M`.[^1] ``r params$m`` has `r (params$q)*2` glycan sites.
+<div style="margin-bottom:40px;">
+</div>
+## **Sequence Display** 
+### **Heavy chain** sequence (`r params$j` amino acids):  
 ##### `r params$f`
 
-### **Light chain** sequence (`r params$k` amino acids) is:    
+### **Light chain** sequence (`r params$k` amino acids):    
 ##### `r params$g`  
 
-### The **extinction coefficient (EC)** of this protein is *`r params$l` /(m cm)*.[^1]
-[^1]: Theoretical extinction coefficient was calculated using the Edelhoch method but with the extinction coefficients for Trp and Tyr determined by Pace et al. Refer to (i) Edelhoch, H. (1967) Spectroscopic determination of tryptophan and tyrosine in proteins. Biochemistry 6, 1948-1954. (ii) Pace, C.N., Vajdos, F., Fee, L., Grimsley, G., and Gray, T. (1995) How to measure and predict the molar absorption coefficient of a protein. Protein Sci. 11, 2411-2423.
 
+
+## **amino acids composition**  Table
 
 ```{r HC AA, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
 knitr::kable(params$h, caption = "Heavy Chain Residue Composition", format = "html", align="c") %>% kable_styling(bootstrap_options = c("striped","condensed","responsive","hover"))  %>%
@@ -82,7 +103,47 @@ knitr::kable(params$i, caption = "Light Chain Residue Composition", format = "ht
 <div style="margin-bottom:50px;">
 </div>
 
-## *Non-reduced Calculations*    
+## **Theoretical Masses** Table [^2]  
+### *Non-reduced Calculations (theoretical)*    
+
+```{r theo nR, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$A, caption = "Non-reduced Masses and Formulas",format = "html",row.names = FALSE, align = "c", col.names = c("HC-pE","LC-pE","CtermK removal","Glycan","DSB","C","H","N","O","S","Mass")) %>% kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=5,"Compositions"=5," "=1)) %>%
+column_spec(6, border_left = T) %>%
+  column_spec(11, border_left = T, bold = T)
+ 
+```
+<div style="margin-bottom:50px;">
+</div>
+### *Reduced Calculations (theoretical)*
+### **Heavy Chain**  
+```{r theo HC fully Reduced, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$B, caption = "Fully-reduced Heavy Chain", format = "html", row.names = FALSE,  align = "c", col.names = c("HC-pE", "CtermK removal", "Glycan", "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(4, border_left = T) %>%
+  column_spec(9, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=3,"Compositions"=5," "=1))
+  
+```
+
+<div style="margin-bottom:50px;">
+</div>
+### **Light Chain**  
+
+```{r theo LC fully Reduced, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+knitr::kable(params$D, caption = "Fully-reduced Light Chain", format = "html",  row.names = FALSE,  align = "c", col.names = c("LC-pE" , "C","H","N","O","S","Mass")) %>%  kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>% 
+  column_spec(2, border_left = T) %>%
+  column_spec(7, border_left = T, bold = T) %>%
+  row_spec(0, bold = T) %>%
+  add_header_above(c("Modifications"=1,"Compositions"=5," "=1))
+  
+```
+
+<div style="margin-bottom:70px;">
+</div>
+## **Expected Masses** Table [^3] 
+### *Non-reduced Calculations (expected)*    
 
 ```{r nR, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
 knitr::kable(params$a, caption = "Non-reduced Masses and Formulas",format = "html",row.names = FALSE, align = "c", col.names = c("HC-pE","LC-pE","CtermK removal","Glycan","DSB","C","H","N","O","S","Mass")) %>% kable_styling(bootstrap_options = c("striped","condensed","responsive","hover")) %>%
@@ -95,7 +156,7 @@ column_spec(6, border_left = T) %>%
 
 <div style="margin-bottom:50px;">
 </div>
-## *Reduced Calculations* 
+### *Reduced Calculations (expected)*
 ### **Heavy Chain** 
 
 ```{r HC fully Reduced, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
@@ -143,4 +204,8 @@ knitr::kable(params$e, caption = "Light Chain with unreduced intra-chain disulfi
 
 
 
+##### software version: v1.0  
 
+[^1]: Theoretical extinction coefficient was calculated using the Edelhoch method but with the extinction coefficients for Trp and Tyr determined by Pace et al. Refer to (i) Edelhoch, H. (1967) Spectroscopic determination of tryptophan and tyrosine in proteins. Biochemistry 6, 1948-1954. (ii) Pace, C.N., Vajdos, F., Fee, L., Grimsley, G., and Gray, T. (1995) How to measure and predict the molar absorption coefficient of a protein. Protein Sci. 11, 2411-2423.
+[^2]: Masses and formulas in *Theoretical Masses* refer to the state of antibody with no terminal modifications, no glycosylations (aglycosylated Asn), the C-term Lys residue and disulfide bonds are retained in this state. Reference averaged atomic masses used in theoretical mass calculations are: "C"=12.0107, "H"=1.00794,"N"=14.0067,"O"=15.9994, "S"=32.0650.
+[^3]: Masses and formulas in *Expected Masses* refer to the various states of antibody with considerations of PTMs heterogeneity. Same set of averaged atomic masses are used.

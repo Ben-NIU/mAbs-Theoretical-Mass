@@ -1,4 +1,4 @@
-Calc.Mass.all.nonR<-function(HC, LC, Items){
+Calc.Mass.all.nonR<-function(HC, LC, Items,Ab.format, FP.ngly){
   
   ## List contains (1) pE status (2) CtermK status, (3) Nglycan status ,(4) SS #
   ## where: pE can be "Yes", "No", and NULL
@@ -14,7 +14,7 @@ Calc.Mass.all.nonR<-function(HC, LC, Items){
   
   for(j in 1:nrow(Items)){
  
-     Formu0<-Calc.Mass.nonR(HC, LC, as.character(Items[j,1]), as.character(Items[j,2]), as.character(Items[j,3]), as.character(Items[j,4]), Items[j,5])
+     Formu0<-Calc.Mass.nonR(HC, LC, as.character(Items[j,1]), as.character(Items[j,2]), as.character(Items[j,3]), as.character(Items[j,4]), Items[j,5],Ab.format, FP.ngly)
     
      Formu<-rbind(Formu, Formu0)   
   

@@ -1,7 +1,10 @@
 
-Turn<-function(composition){
+Turn<-function(composition, cust){
   
-if(composition==""){num<-c(C=0, H=0, N=0, O=0, S=0)
+if(cust == "No") {return(c("C"=0, "H"=0, "N"=0, "O"=0, "S"=0))}
+  else if(cust == "Yes") {
+  
+if(composition==""| is.null(composition)){num<-c(C=0, H=0, N=0, O=0, S=0)
 }else {
   
   SPL<-strsplit(composition,"")[[1]]
@@ -59,4 +62,5 @@ names(num)<-SPL[which(SPL %in% c("C","H","N","O","S"))]
   
     
 return(judge(num))
+  }
 }

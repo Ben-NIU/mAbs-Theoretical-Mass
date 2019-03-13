@@ -1,0 +1,10 @@
+name: myApp
+title:
+username:
+account: benniu-wustl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 739348
+bundleId: 1899367
+url: https://benniu-wustl.shinyapps.io/myApp/
+when: 1551134862.0896

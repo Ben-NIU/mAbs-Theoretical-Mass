@@ -1,9 +1,9 @@
-show.table.nonR<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan, AorB, Others, howmany,ds.hing, ds.lchc, ds.hchc, ds.lclc, nonRds.intraHC=3, nonRds.intraLC=1){
+show.table.nonR<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan,  Others, howmany, cust,cust.ptm, c.howmany,ds.hing, ds.lchc, ds.hchc, ds.lclc, nonRds.intraHC=3, nonRds.intraLC=1, extra){
   source("Calc.Mass.HC.nonR.R")
   source("Calc.Mass.LC.R")
   
   ## compute the theoretical formula depending on PTM input.
-  HC.form.thr<-Calc.Mass.HC.nonR(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan, AorB, Others, howmany,ds.hing, ds.lchc, ds.hchc)
+  HC.form.thr<-Calc.Mass.HC.nonR(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan,  Others, howmany, cust, cust.ptm, c.howmany,ds.hing, ds.lchc, ds.hchc, extra)
   LC.form.thr<-Calc.Mass.LC(as.character(Seq.info$LC[2]), PyroE.lc, ds.lclc)
   
   mAb.form.thr<-(HC.form.thr+LC.form.thr)*2  ## REPORT
@@ -23,7 +23,9 @@ show.table.nonR<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan, AorB, Other
   #===============================================================================#
   HC.fml<-data.frame( "C"=HC.poly[["C"]],"H"=HC.poly[["H"]],"N"=HC.poly[["N"]],"O"=HC.poly[["O"]],"S"=HC.poly[["S"]], check.names = FALSE)
   LC.fml<-data.frame( "C"=LC.poly[["C"]],"H"=LC.poly[["H"]],"N"=LC.poly[["N"]],"O"=LC.poly[["O"]],"S"=LC.poly[["S"]], check.names = FALSE)
-  mAb.fml<-data.frame( "C"=mAb.form.thr[["C"]],"H"=mAb.form.thr[["H"]], "N"=mAb.form.thr[["N"]],"O"=mAb.form.thr[["O"]],"S"=mAb.form.thr[["S"]],  check.names = FALSE )
+
+  
+  mAb.fml<-data.frame("C"=mAb.form.thr[["C"]], "H"= mAb.form.thr[["H"]], "N"= mAb.form.thr[["N"]], "O"=mAb.form.thr[["O"]], "S" =mAb.form.thr[["S"]], check.names = FALSE )
   HC.ms<-HC.mass.poly
   LC.ms<-LC.mass.poly
   mAb.ms<-mAb.mass.thr

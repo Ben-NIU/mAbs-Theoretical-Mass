@@ -1,10 +1,10 @@
-show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, AorB, Others, howmany, where, ds.unhc=3, ds.unlc=2){
+show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, Others, howmany1, where1, r.cust, fml.cust, where2, howmany2, ds.unhc=3, ds.unlc=2, EXTRA_R){
   source("Calc.Mass.HC.Red.R")
   source("Calc.Mass.LC.Red.R")
   
   ## compute the theoretical formula depending on PTM input.
-  HC.form.thr<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, AorB, Others, howmany, where, 0)  ## REPORT
-  LC.form.thr<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, AorB, Others, howmany,where,0)  ## REPORT
+  HC.form.thr<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, Others, howmany1, where1, r.cust, fml.cust, where2, howmany2,0, EXTRA_R)  ## REPORT
+  LC.form.thr<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, Others, howmany1,where1,  r.cust, fml.cust, where2, howmany2,0)  ## REPORT
 
 
   #===========================================================#
@@ -14,8 +14,8 @@ show.table.Red<-function(Seq.info, PyroE.hc, PyroE.lc, Lys, Glycan.Red, AorB, Ot
   LC.mass.thr<-round(sum(LC.form.thr*Standard),2)  ## REPORT
 
   
-  HC.form.expect<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, AorB, Others, howmany, where, ds.unhc)  ## REPORT
-  LC.form.expect<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, AorB, Others, howmany,where,ds.unlc)  ## REPORT
+  HC.form.expect<-Calc.Mass.HC.Red(as.character(Seq.info$HC[2]), PyroE.hc, Lys, Glycan.Red, Others, howmany1, where1, r.cust, fml.cust, where2, howmany2, ds.unhc,EXTRA_R)  ## REPORT
+  LC.form.expect<-Calc.Mass.LC.Red(as.character(Seq.info$LC[2]), PyroE.lc, Others, howmany1,where1,  r.cust, fml.cust, where2, howmany2, ds.unlc)  ## REPORT
   HC.mass.expect<-round(sum(HC.form.expect*Standard),2)  ## REPORT
   LC.mass.expect<-round(sum(LC.form.expect*Standard),2)  ## REPORT
 

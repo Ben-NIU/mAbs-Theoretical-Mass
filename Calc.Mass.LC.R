@@ -4,7 +4,7 @@ Calc.Mass.LC<-function(LC, PyroE.lc, ds.lclc){
   
 
 
-  if(is.null(PyroE.lc)){
+  if(is.null(PyroE.lc) | !substr(LC, 1,1) %in% c("E", "Q")){
     pyroe<-0
   } else {
     if(PyroE.lc=="No"){

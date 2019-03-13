@@ -1,4 +1,4 @@
-Calc.Mass.all.R<-function(HC, LC, Items){
+Calc.Mass.all.R<-function(HC, LC, Items, Ab.format, FP.ngly){
   
   
   source("Calc.Mass.R.R")
@@ -11,7 +11,7 @@ Calc.Mass.all.R<-function(HC, LC, Items){
   
   for(j in 1:nrow(Items)){
     
-    Formu0<-Calc.Mass.R(HC, LC, as.character(Items[j,1]), as.character(Items[j,2]), as.character(Items[j,3]), as.character(Items[j,4]), Items[j,5], Items[j,6])
+    Formu0<-Calc.Mass.R(HC, LC, as.character(Items[j,1]), as.character(Items[j,2]), as.character(Items[j,3]), as.character(Items[j,4]), Items[j,5], Items[j,6],Ab.format, FP.ngly)
     ## Forum0 will be a list with 4 components: HC.withDSB", "LC.withDSB", "HC.fullR", "LC.fullR".
     
     Formu.withDSB.HC<-rbind(Formu.withDSB.HC, Formu0$HC.withDSB)
